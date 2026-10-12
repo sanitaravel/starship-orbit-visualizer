@@ -1,0 +1,24 @@
+name: Feature idea
+description: Suggest an idea or improvement for the visualizer.
+title: "[Idea]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: Ideas are welcome! Describe what you'd like to see and why it would be useful.
+  - type: textarea
+    id: idea
+    attributes:
+      label: What's your idea?
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why would it be useful?
+      description: The problem it solves or the use case (e.g. a specific Starship flight profile).
+  - type: textarea
+    id: details
+    attributes:
+      label: Details, references or sketches
+      description: Links to data sources, formulas, mock-ups, similar tools.

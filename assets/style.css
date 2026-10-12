@@ -1,0 +1,123 @@
+/* Bundled JetBrains Mono (SIL OFL 1.1, see fonts/JetBrainsMono-OFL.txt); no CDN. */
+@font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("/assets/fonts/JetBrainsMono-Regular.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 700; font-style: normal; font-display: swap;
+  src: url("/assets/fonts/JetBrainsMono-Bold.woff2") format("woff2"); }
+
+/* Mirrors starship_viz/theme.py. */
+:root {
+  --accent: #FF8014; --accent-2: #CF0000; --text: #FEFEFE; --bg: #262626;
+  --sidebar: #202020; --field: #2e2e2e; --border: #4a4a4a;
+}
+body, input, button, select, textarea, label, h3, table, .dash-dropdown, .dash-dropdown *,
+.dash-datepicker-input, .DateInput_input, .CalendarDay, .DayPicker, [class*="datepicker"],
+[class*="dropdown"], .js-plotly-plot, .js-plotly-plot text, .js-plotly-plot .legendtext {
+  font-family: "JetBrains Mono", monospace !important; }
+body { margin: 0; background: var(--bg); color: var(--text); overflow: hidden; }
+label, h3 { color: var(--text); }
+
+/* Inputs */
+input { color: var(--text) !important; background: var(--field) !important;
+        border: 1px solid var(--border); border-radius: 4px; color-scheme: dark; }
+input:focus { outline: none; border-color: var(--accent) !important;
+              box-shadow: 0 0 0 1px var(--accent); }
+input::placeholder { color: #9a9a9a !important; }
+input[type=radio] { accent-color: var(--accent); }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { opacity: 1; filter: invert(1) brightness(0.9); }
+.dash-radioitems label, .dash-radioitems-label { color: var(--text) !important; }
+
+/* Dropdown (Dash 4 uses Radix-style classes; cover both generations) */
+.themed-dropdown, .dash-dropdown, .Select-control, .Select-menu-outer, .Select-menu,
+.dash-dropdown-content, .dash-dropdown-options, [class*="dropdown-content"] {
+  background: var(--field) !important; color: var(--text) !important;
+  border-color: var(--border) !important; }
+.dash-dropdown *, .Select-value-label, .Select-placeholder, .Select-input > input,
+.dash-dropdown-content * { color: var(--text) !important; }
+.dash-dropdown:focus-within, .is-focused > .Select-control { border-color: var(--accent) !important; }
+.dash-dropdown-option:hover, .dash-dropdown-option[data-highlighted],
+.dash-options-list-option:hover, .Select-option.is-focused, .VirtualizedSelectFocusedOption {
+  background: #3a3a3a !important; color: var(--accent) !important; }
+.dash-dropdown-option[aria-selected=true], .Select-option.is-selected {
+  background: #3a3a3a !important; color: var(--accent) !important; }
+.Select-arrow { border-top-color: var(--text) !important; }
+.dash-dropdown svg { fill: var(--text); color: var(--text); }
+
+/* Date picker */
+.dash-datepicker-input, .dash-datepicker-input-wrapper, .DateInput, .DateInput_input,
+.SingleDatePickerInput { background: var(--field) !important; color: var(--text) !important;
+  -webkit-text-fill-color: var(--text); opacity: 1 !important; border-color: var(--border); }
+.dash-datepicker-input:focus, .DateInput_input__focused { border-color: var(--accent) !important; }
+.dash-datepicker-content, .dash-datepicker-calendar, .DayPicker, .CalendarMonthGrid,
+.CalendarMonth, .CalendarDay, .DayPicker_transitionContainer, .SingleDatePicker_picker,
+[class*="datepicker-content"], [class*="datepicker-calendar"] {
+  background: var(--field) !important; color: var(--text) !important; border-color: var(--border) !important; }
+.dash-datepicker-content *, .CalendarDay, .CaptionNavigation, .DayPicker_weekHeader_li,
+.CalendarMonth_caption { color: var(--text) !important; }
+.CalendarDay__default { border: 1px solid #3a3a3a; }
+.CalendarDay__default:hover, [class*="datepicker"] button:hover { background: #3a3a3a !important; }
+.CalendarDay__selected, .CalendarDay__selected:hover,
+[class*="datepicker"] [aria-selected=true], [class*="datepicker"] [data-selected=true] {
+  background: var(--accent) !important; color: var(--bg) !important; border-color: var(--accent) !important; }
+.CalendarDay__selected * { color: var(--bg) !important; }
+.DayPickerNavigation_button, .dash-datepicker-content button { background: var(--field); color: var(--text); border-color: var(--border); }
+.DayPickerNavigation_svg__horizontal { fill: var(--text); }
+
+/* Number +/- buttons */
+.dash-input-stepper { background: var(--bg) !important; color: var(--text) !important;
+  border: 1px solid var(--border) !important; border-radius: 3px; cursor: pointer; }
+.dash-input-stepper:hover, .dash-input-stepper:focus-visible { border-color: var(--accent) !important; color: var(--accent) !important; }
+.dash-input-container:focus-within { border-color: var(--accent) !important; }
+.dash-input-container input { border: none !important; box-shadow: none !important; }
+.dash-datepicker-input:focus, .dash-datepicker-input-wrapper:focus-within { border-color: var(--accent) !important; outline: 1px solid var(--accent) !important; }
+
+/* Playback bar (buttons, scrubber, UTC label, speed); driven by assets/playback.js.
+   The bar itself lets map interactions through; only its controls take the mouse. */
+.playback { position: absolute; left: 14px; right: 14px; bottom: 10px; height: 30px; display: flex;
+  align-items: center; gap: 6px; z-index: 5; pointer-events: none; }
+.playback > * { pointer-events: auto; }
+.pb-btn { width: 36px; height: 30px; padding: 0; font-size: 15px; line-height: 1; cursor: pointer;
+  background: var(--field); color: var(--text); border: 1px solid var(--border); border-radius: 4px; }
+.pb-btn:hover, .pb-btn:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+.pb-btn:focus-visible { box-shadow: 0 0 0 1px var(--accent); }
+.pb-speed select { height: 30px; box-sizing: border-box; padding: 0 4px; cursor: pointer; font-size: 13px;
+  background: var(--field); color: var(--text); border: 1px solid var(--border); border-radius: 4px;
+  color-scheme: dark; }
+.pb-speed select:hover, .pb-speed select:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+.pb-speed option { background: var(--field); color: var(--text); }
+.pb-range-box { flex: 1; min-width: 80px; display: flex; align-items: center; }
+.pb-range { -webkit-appearance: none; appearance: none; width: 100%; height: 30px; margin: 0; padding: 0;
+  background: transparent !important; border: none !important; cursor: pointer; }
+.pb-range:focus { box-shadow: none !important; }
+.pb-range::-webkit-slider-runnable-track { height: 6px; background: #3a3a3a; border: 1px solid var(--border);
+  border-radius: 3px; }
+.pb-range::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 20px; margin-top: -8px;
+  background: var(--accent); border: 1px solid var(--accent); border-radius: 3px; }
+.pb-range:hover::-webkit-slider-thumb, .pb-range:focus-visible::-webkit-slider-thumb { background: var(--text); }
+.pb-range::-moz-range-track { height: 6px; background: #3a3a3a; border: 1px solid var(--border); border-radius: 3px; }
+.pb-range::-moz-range-thumb { width: 12px; height: 20px; background: var(--accent); border: 1px solid var(--accent);
+  border-radius: 3px; }
+.pb-utc { min-width: 24ch; font-size: 14px; color: var(--text); white-space: nowrap; text-align: left; }
+
+/* 2D canvas overlay drawn by playback.js; never blocks map interaction. */
+.pb-overlay { position: absolute; left: 0; top: 0; pointer-events: none; }
+
+/* Plotly modebar */
+.modebar-container .modebar { background: var(--sidebar) !important; border: 1px solid var(--border);
+  border-radius: 4px; padding: 1px 2px; }
+.modebar-group { background: transparent !important; }
+.modebar-btn { background: transparent !important; border-radius: 3px; }
+.modebar-btn path { fill: var(--text) !important; }
+.modebar-btn:hover { background: var(--field) !important; }
+.modebar-btn:hover path, .modebar-btn.active path { fill: var(--accent) !important; }
+.modebar-btn.active { background: var(--field) !important; }
+
+/* Date field: the Dash 4 root .dash-datepicker paints a white background that shows as
+   small white corners around the rounded wrapper. Make the root transparent and keep the
+   radius consistent on the wrapper and the nested input. */
+.dash-datepicker { background: transparent !important; box-shadow: none !important; border-radius: 4px; }
+.dash-datepicker-input-wrapper { border-radius: 4px !important; box-shadow: none; overflow: hidden; }
+.dash-datepicker-input-wrapper:focus-within { box-shadow: none; }
+.dash-datepicker-input-wrapper .dash-datepicker-input { border-radius: 0 !important; box-shadow: none !important;
+  border: none !important; outline: none !important; }
+.dash-datepicker-input-wrapper svg { color: var(--text); fill: currentColor; }

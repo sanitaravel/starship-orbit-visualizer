@@ -1,0 +1,44 @@
+name: Bug report
+description: Something in the visualizer is wrong or broken.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting! Please fill in as much as you can so the problem can be reproduced.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Inputs you used (launch site, azimuth/inclination, altitude, orbits, launch UTC, view, time step, speed) and what you clicked.
+      placeholder: |
+        1. Launch site: Starbase, TX; Azimuth 95; 200 km; 3 orbits; 2D
+        2. Press play at 300x
+        3. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: view
+    attributes:
+      label: View
+      options: ["2D", "3D", "Both", "Not view-specific"]
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, browser and version, Python version.
+      placeholder: Windows 11, Edge 141, Python 3.12
+  - type: textarea
+    id: logs
+    attributes:
+      label: Screenshots, console errors or terminal output
+      description: Paste any errors from the browser console or the terminal running app.py.
