@@ -42,6 +42,14 @@ input[type=number]::-webkit-outer-spin-button { opacity: 1; filter: invert(1) br
   background: #3a3a3a !important; color: var(--accent) !important; }
 .Select-arrow { border-top-color: var(--text) !important; }
 .dash-dropdown svg { fill: var(--text); color: var(--text); }
+/* Dash 4 search box inside the open dropdown: its container defaults to a light fill. */
+.dash-dropdown-search-container { background: var(--field) !important;
+  border: 1px solid var(--border) !important; }
+.dash-dropdown-search-container:focus-within { border-color: var(--accent) !important;
+  outline: 1px solid var(--accent) !important; }
+.dash-dropdown-search-container input, .dash-dropdown-search {
+  background: transparent !important; border: none !important; box-shadow: none !important; }
+.dash-dropdown-search-container:focus-within .dash-dropdown-search-icon { color: var(--accent) !important; }
 
 /* Date picker */
 .dash-datepicker-input, .dash-datepicker-input-wrapper, .DateInput, .DateInput_input,

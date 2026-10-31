@@ -195,11 +195,13 @@ def make_layout():
     ])
 
 
-app = Dash(__name__, title='Starship trajectories')
-app.layout = make_layout
+dash_app = Dash(__name__, title='Starship trajectories')
+dash_app.layout = make_layout
+# Flask WSGI server: the module-level `app` that Vercel (and any WSGI host) loads.
+app = dash_app.server
 
 
-@app.callback(Output('direction-box', 'style'), Input('mode', 'value'))
+@dash_app.callback(Output('direction-box', 'style'), Input('mode', 'value'))
 def toggle_direction(mode):
     """Show the direction control only in inclination mode."""
     return {'display': 'block'} if mode == 'inclination' else {'display': 'none'}
@@ -238,9 +240,9 @@ def convert_mode_value(mode, value, site, direction):
         return None, no_update
 
 
-@app.callback(Output('value', 'value'), Output('direction', 'value'),
-              Input('mode', 'value'), State('value', 'value'), State('site', 'value'),
-              State('direction', 'value'), prevent_initial_call=True)
+@dash_app.callback(Output('value', 'value'), Output('direction', 'value'),
+                   Input('mode', 'value'), State('value', 'value'), State('site', 'value'),
+                   State('direction', 'value'), prevent_initial_call=True)
 def convert_value(mode, value, site, direction):
     """On a mode switch, convert the entered value to the new quantity."""
     return convert_mode_value(mode, value, site, direction)
@@ -257,12 +259,12 @@ def _new_graph(fig):
                      style={'height': '100vh'}, config=GRAPH_CONFIG)
 
 
-@app.callback(Output('graph-box', 'children'), Output('graph-box', 'style'),
-              Output('error', 'children'), Output('derived', 'children'),
-              Input('site', 'value'), Input('mode', 'value'), Input('value', 'value'),
-              Input('direction', 'value'), Input('alt', 'value'), Input('orbits', 'value'),
-              Input('date', 'date'), Input('time', 'value'), Input('view', 'value'),
-              Input('step', 'value'), State('graph-box', 'children'))
+@dash_app.callback(Output('graph-box', 'children'), Output('graph-box', 'style'),
+                   Output('error', 'children'), Output('derived', 'children'),
+                   Input('site', 'value'), Input('mode', 'value'), Input('value', 'value'),
+                   Input('direction', 'value'), Input('alt', 'value'), Input('orbits', 'value'),
+                   Input('date', 'date'), Input('time', 'value'), Input('view', 'value'),
+                   Input('step', 'value'), State('graph-box', 'children'))
 def update(site, mode, value, direction, alt_km, n_orbits, date_str, time_str, view, step_s,
            previous):
     """Rebuild the figure on any parameter change; show errors inline."""
@@ -293,4 +295,4 @@ def update(site, mode, value, direction, alt_km, n_orbits, date_str, time_str, v
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8050, debug='--debug' in sys.argv)
+    dash_app.run(host='127.0.0.1', port=8050, debug='--debug' in sys.argv)
